@@ -59,8 +59,21 @@ router.get("/:id", async (req, res, next) => {
     } catch(err) {
         next(err)
     }
-
 })
+
+router.post("/:id/delete", async (req, res, next) => {
+    const { id } = req.params
+    try {
+
+    await MovieModel.findByIdAndRemove(id)
+
+    res.redirect("/movies")
+
+    } catch(err) {
+        next(err)
+    }
+})
+
 
 
 module.exports = router;
