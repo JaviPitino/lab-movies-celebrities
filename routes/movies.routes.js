@@ -81,9 +81,8 @@ const { id } = req.params
        
        // we use .lean() to obtain a plain object
        // https://stackoverflow.com/questions/14504385/why-cant-you-modify-the-data-returned-by-a-mongoose-query-ex-findbyid
-       let celebrities = await CelebrityModel.find().lean()
-       
-       //let celebrities = await CelebrityModel.find()
+       const celebrities = await CelebrityModel.find().lean()    
+       //const celebrities = await CelebrityModel.find()
        
        movie.cast.forEach(cast=>{
            celebrities.forEach((celebrity, index) =>{
@@ -92,7 +91,6 @@ const { id } = req.params
                    celebrities[index].active=true;
                }
            })
-
        })
        console.log("Movie", movie)
        console.log("Celebrities", celebrities)
