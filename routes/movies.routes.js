@@ -74,6 +74,40 @@ router.post("/:id/delete", async (req, res, next) => {
     }
 })
 
+router.get("/:id/edit", async (req, res, next) => {
+const { id } = req.params
+    try {
+       const movie = await MovieModel.findById(id)
+       const celebrities = await CelebrityModel.find()
+
+        res.render("movies/edit-movie.hbs", {
+            movie,
+            celebrities
+        })
+
+    } catch(err) {
+        next(err)
+    }
+})
+
+router.post("/:id/edit", async (req, res, next) => {
+    const { id } = req.params
+    const { title, genre, plot, cast } = req.body
+    try {
+
+        await MovieModel.findByIdAndUpdate(id, {
+            title,
+            genre,
+            plot,
+            cast
+        })
+        res.redirect(`/movies/${id}`)
+
+    } catch(err) {
+        next(err)
+    }
+})
+
 
 
 module.exports = router;
