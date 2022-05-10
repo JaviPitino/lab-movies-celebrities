@@ -50,7 +50,7 @@ router.get("/:id", async (req, res, next) => {
 
     const { id } = req.params
     try {
-        const movie = await MovieModel.findById(id).populate("celebrity")
+        const movie = await MovieModel.findById(id).populate("cast")
         
         res.render("movies/movie-details.hbs", {
             movie
