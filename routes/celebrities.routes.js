@@ -2,8 +2,18 @@ const CelebrityModel = require("../models/Celebrity.model");
 
 const router = require("express").Router();
 
-router.get("/", (req, res, next) => {
-    res.render("celebrities/celebrities.hbs")
+router.get("/", async (req, res, next) => {
+
+    try {
+        const celebrities = await CelebrityModel.find()
+        res.render("celebrities/celebrities.hbs", {
+            celebrities
+        })
+
+    } catch(err) {
+        next(err)
+    }
+
 })
 
 router.get("/create", (req, res, next) => {
