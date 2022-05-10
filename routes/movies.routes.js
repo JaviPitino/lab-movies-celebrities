@@ -84,7 +84,6 @@ const { id } = req.params
        let celebrities = await CelebrityModel.find().lean()
        
        //let celebrities = await CelebrityModel.find()
-       let newCelebrities = []
        
        movie.cast.forEach(cast=>{
            celebrities.forEach((celebrity, index) =>{
