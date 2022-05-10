@@ -32,6 +32,20 @@ router.post("/create", async (req, res, next) => {
     }
 })
 
+router.get("/", async (req, res, next) => {
+
+    try {
+
+        const movies = await MovieModel.find().select("title")
+        res.render("movies/movies.hbs", {
+            movies
+        })
+
+    } catch(err) {
+        next(err)
+    }
+
+})
 
 
 module.exports = router;
