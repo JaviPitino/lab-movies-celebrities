@@ -44,6 +44,21 @@ router.get("/", async (req, res, next) => {
     } catch(err) {
         next(err)
     }
+})
+
+router.get("/:id", async (req, res, next) => {
+
+    const { id } = req.params
+    try {
+        const movie = await MovieModel.findById(id).populate("celebrity")
+        
+        res.render("movies/movie-details.hbs", {
+            movie
+        })
+
+    } catch(err) {
+        next(err)
+    }
 
 })
 

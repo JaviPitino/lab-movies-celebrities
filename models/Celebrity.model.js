@@ -1,7 +1,7 @@
 //  Add your code here
 const mongoose = require("mongoose");
 
-const celibritySchema = new mongoose.Schema({
+const celebritySchema = new mongoose.Schema({
 
     name: {
         type: String
@@ -15,6 +15,6 @@ const celibritySchema = new mongoose.Schema({
 
 })
 
-const CelebrityModel = mongoose.model("celebrity", celibritySchema)
+const CelebrityModel = mongoose.model("celebrity", celebritySchema)
 
 module.exports = CelebrityModel;
