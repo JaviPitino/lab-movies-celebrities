@@ -15,7 +15,7 @@
     <br>
     <select name="cast" multiple="true">
         {{#each celebrities}}
-            <option value="{{this._id}}" selected="true"> {{this.name}}</option>
+            <option value="{{this._id}}" {{#if this.active}}selected="true"{{/if}}> {{this.name}}</option>
         {{/each}}
     </select>
 

@@ -78,7 +78,25 @@ router.get("/:id/edit", async (req, res, next) => {
 const { id } = req.params
     try {
        const movie = await MovieModel.findById(id)
-       const celebrities = await CelebrityModel.find()
+       
+       // we use .lean() to obtain a plain object
+       // https://stackoverflow.com/questions/14504385/why-cant-you-modify-the-data-returned-by-a-mongoose-query-ex-findbyid
+       let celebrities = await CelebrityModel.find().lean()
+       
+       //let celebrities = await CelebrityModel.find()
+       let newCelebrities = []
+       
+       movie.cast.forEach(cast=>{
+           celebrities.forEach((celebrity, index) =>{
+               if(String(celebrity._id)==String(cast._id)){
+                   console.log("MATCH CELEBRITY _id: ", celebrity._id, "CAST_id: ", cast._id)
+                   celebrities[index].active=true;
+               }
+           })
+
+       })
+       console.log("Movie", movie)
+       console.log("Celebrities", celebrities)
 
         res.render("movies/edit-movie.hbs", {
             movie,
